@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyllm-eval-suite"
+version = "0.1.0"
+description = "Reproducible evaluation harness for small (sub-7B) language models on task-specific benchmarks."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11,<3.13"
+authors = [
+    {name = "Muneeb Anjum", email = "noreply@horizonbymuneeb.local"},
+]
+keywords = ["evaluation", "llm", "huggingface", "benchmark", "tinyllm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.scripts]
+tinyllm-eval = "tinyllm_eval.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/horizonbymuneeb/tinyllm-eval-suite"
+Issues = "https://github.com/horizonbymuneeb/tinyllm-eval-suite/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["tinyllm_eval*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests that need network or large model files",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "RUF"]
+ignore = ["E501"]  # long lines are fine in YAML strings and tables
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true

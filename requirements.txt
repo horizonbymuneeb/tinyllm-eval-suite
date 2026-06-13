@@ -1,0 +1,36 @@
+# tinyllm-eval-suite runtime + dev deps
+# Pinned to known-good versions as of project bootstrap.
+# Bump deliberately; lockfile-style pinning is intentional for reproducibility.
+
+# --- core ---
+python>=3.11,<3.13
+
+# --- modeling / data ---
+transformers==4.46.3
+datasets==3.2.0
+huggingface-hub==0.27.0
+tokenizers==0.20.3
+torch==2.5.1
+safetensors==0.4.5
+
+# --- eval plumbing ---
+numpy==1.26.4
+pyyaml==6.0.2
+jsonschema==4.23.0
+typer==0.13.1
+rich==13.9.4
+tqdm==4.67.1
+
+# --- metrics ---
+nltk==3.9.1
+rouge-score==0.1.2
+scikit-learn==1.6.0
+
+# --- experiment tracking (optional) ---
+wandb==0.18.7
+
+# --- dev / test ---
+pytest==8.3.4
+pytest-cov==6.0.0
+ruff==0.7.4
+mypy==1.13.0
