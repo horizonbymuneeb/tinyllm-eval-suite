@@ -1,0 +1,33 @@
+name: glue_sst2_mini
+description: GLUE SST-2 binary sentiment classification, validation split, capped at 100 examples
+version: 0.1.0
+
+dataset:
+  name: glue
+  config: sst2
+  split: validation
+  limit: 100
+
+model:
+  device: auto
+  dtype: float32
+
+prompt:
+  template: "Sentence: {sentence}\nSentiment:"
+  input_fields: [sentence]
+  target_field: label
+
+metrics:
+  - name: exact_match
+
+inference:
+  max_new_tokens: 4
+  batch_size: 8
+  temperature: 0.0
+  top_p: 1.0
+  seed: 42
+
+filters:
+  max_input_length: 512
+  # Extract a single-token answer (positive/negative) from the model's output.
+  regex: "(positive|negative)"
